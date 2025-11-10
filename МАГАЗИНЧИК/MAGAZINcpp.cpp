@@ -28,7 +28,25 @@ void CreateStorage();
 template <typename Arr>
 void FillArray(Arr*& dimanicArr, size_t size);
 //конец склада
-
+// служба
+void ShowSuperAdminMenu()
+{
+	std::string choose;
+	while (true)
+	{
+		system("cls");
+		std::cout << "1 -начать продажу\n";
+		std::cout << "2 - Показать склад\n";
+		std::cout << "3 - Пополнит склад\n";
+		std::cout << "4 - Списать товар\n";
+		std::cout << "5 - изменить цену\n";
+		std::cout << "6 - редактировать персонал\n";
+		std::cout << "7 - отчёт о приболи\n";
+		std::cout << "8 - редактировать склад\n";
+		std::cout << "0 - закрыть магазин\n";
+		std::cout << "ввод:"
+	}
+}
 
 
 void CreateStorage()
