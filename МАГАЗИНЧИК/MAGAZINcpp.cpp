@@ -90,23 +90,23 @@ void ShowSuperAdminMenu()
 		std::cout << "ввод:";
 		Getline(choose);
 
-		if (choose == "1")
+		if (choose == "1" && storageSize > 0)
 		{
 			AddNewItem();
 		}
-		if (choose == "2")
+		if (choose == "2" && storageSize > 0)
 		{
 
 		}
-		if (choose == "3")
+		if (choose == "3" && storageSize > 0)
 		{
 
 		}
-		if (choose == "4")
+		if (choose == "4" && storageSize > 0)
 		{
 			
 		}
-		if (choose == "5")
+		if (choose == "5" && storageSize > 0)
 		{
 		}
 		if (choose == "6")
@@ -125,6 +125,10 @@ void ShowSuperAdminMenu()
 		}
 		else
 		{
+			if (storageSize <= 0)
+			{
+
+			}
 			Err();
 		}
 	}
@@ -174,7 +178,36 @@ void DeleteItem()
 	while (true)
 	{
 		if (IsNumber(chooseId))
-			if
+			if (id < 0 || id > storageSize - 1)
+			else
+				if (choose == "1")
+				{
+					std::string* nameArrTemp = new std::string[storageSize];
+					unsigned int* countArrTemp = new unsigned int[storageSize];
+					double* priceArrTemp = new double[storageSize];
+					for (size_t i = 0, c = 0; i < storageSize; i++, c++)
+					{
+						if (id == c)
+						{
+							c++;
+						}
+						idArrTemp[i] = i + 1;
+						nameArrTemp[i] = nameArr[c];
+						countArrTemp[i] = countArr[c];
+						priceArrTemp[i] = priceArr[c];
+					}
+						std::swap(idArr, idArrTemp);
+						std::swap(nameArr, nameArrTemp);
+						std::swap(countArr, countArrTemp);
+						std::swap(priceArr, priceArrTemp);
+						delete[]idArrTemp, nameArrTemp, countArrTemp, priceArrTemp;
+						std::cout << "Идёт подготовка";
+						Sleep(2000);
+						std::cout << "Товар успешно удалён\n\n";
+						Sleep(1500);
+						break
+					}
+				}
 }
 void ShowStorage(int mode)
 {
