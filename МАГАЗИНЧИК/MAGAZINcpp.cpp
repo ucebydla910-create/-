@@ -10,6 +10,7 @@ std::string userStatus[3]{"Супер админ", "админ", "сотрудн
 std::string* loginArr = new std::string[userSize]{ "admin", "user"};
 std::string* passArr = new std::string[userSize]{ "admin", "user"};
 std::string* statusArr = new std::string[userSize]{userStatus[0], userStatus[2]};
+void ChangeUsers();
 std::string currentStatus;
 //конец//
 //склад
@@ -115,7 +116,7 @@ void ShowSuperAdminMenu()
 		}
 		if (choose == "7")
 		{
-			
+			void ChangeUsers();
 		}
 
 		if (choose == "0")
@@ -130,6 +131,41 @@ void ShowSuperAdminMenu()
 
 			}
 			Err();
+		}
+	}
+}
+void ChangeUsers()
+{
+	std::string choose;
+	while (true)
+	{
+		system("cls");
+		std::cout << "1 - добавить нового пользователя\n";
+		std::cout << "2 - изменить пароль пользователя\n";
+		std::cout << "3 - удалить пользователя\n";
+		std::cout << "0 - выйти из редактора\n";
+		std::cout << "ввод:\n";
+		if (choose == "1")
+		{
+		
+		}
+		if (choose == "2" && storageSize > 0)
+		{
+
+		}
+		if (choose == "3" && storageSize > 0)
+		{
+
+		}
+		if (choose == "0")
+		{
+			system("cls");
+			break;
+		}
+		else
+		{
+			if (choose == "exit");
+			Err;
 		}
 	}
 }
