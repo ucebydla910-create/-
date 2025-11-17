@@ -27,6 +27,8 @@ void FillArray(Arr*& dimanicArr, size_t size);
 void AddStorageItem();
 void AddNewItem();
 void ChangePrice();
+void ChangeName();
+void DeleteItem();
 void ChangeStorage()
 {
 	std::string choose;
@@ -37,18 +39,26 @@ void ChangeStorage()
 		std::cout << "3 - удалить товар\n";
 		std::cout << "0 - выйти из редактора\n";
 		std::cout << "ввод:\n";
-		if (choose == "1");
-		else if (choose == "3")
+		if (choose == "1")
 		{
-			(AddNewItem == "1");
+			AddNewItem();
 		}
-		else if (choose == "0")
+		if (choose == "2")
 		{
+
+		}
+		if (choose == "3")
+		{
+
+		}
+		if (choose == "0")
+		{
+			system("cls");
 			break;
 		}
-		else if (choose == "0")
+		else
 		{
-			Err();
+			Err;
 		}
 	}
 }
@@ -82,7 +92,7 @@ void ShowSuperAdminMenu()
 
 		if (choose == "1")
 		{
-			ShowStorage();
+			AddNewItem();
 		}
 		if (choose == "2")
 		{
@@ -94,35 +104,28 @@ void ShowSuperAdminMenu()
 		}
 		if (choose == "4")
 		{
-
+			
 		}
 		if (choose == "5")
 		{
-
 		}
 		if (choose == "6")
 		{
-
+			
 		}
 		if (choose == "7")
 		{
-
+			
 		}
-		if (choose == "8")
-		{
 
-		}
-		if (choose == "9")
+		if (choose == "0")
 		{
-
-		}
-		if (choose == "10")
-		{
-
+			system("cls");
+			break;
 		}
 		else
 		{
-
+			Err();
 		}
 	}
 }
@@ -150,7 +153,7 @@ void CreateStorage()
 	int id[staticSize]{ 1,2,3,4,5,6,7,8,9,10 };
 	std::string name[staticSize];
 	"Земфир: оболочная нежность", "Пражский торт: Вечер в праге", "сахарное печение: хрустальные грёзы", "пряники: медово-горчичный",
-		"брани: Малиновый рассвет", "набор для приготоаленния своего торта или пироженного: Сладкий конструктор", "Жевательно-миндальное печенье-меренга: сибирская резина"
+		"брани: Малиновый рассвет", "набор для приготовленния своего торта: Сладкий конструктор", "Жевательно-миндальное печенье-меренга: сибирская резина"
 		"Ассорти из изящных итальянских сладостей: Дольче Вита", "яркие леденцы: взрывная карамель", "шоколадки: грильяж в шоколаде";
 	unsigned int count[staticSize]{ 20,12,65,34,21,8,32,43,23,6 };
 	double price[staticSize]{ 143.3,210.4,452.1,377.3,116.8,287.2,140.4,210.3,899.9,1900.0 };
@@ -164,11 +167,19 @@ void CreateStorage()
 	FillArray(countArr, count, storageSize);
 	FillArray(nameArr, name, storageSize);
 }
-
+void DeleteItem()
+{
+	std::string chooseId, choose;
+	unsigned int id = 0;
+	while (true)
+	{
+		if (IsNumber(chooseId))
+			if
+}
 void ShowStorage(int mode)
 {
 	system("cls");
-	std::cout < "ID\t" << std::left << std::setw(20) << "название товара\t\t" << "Цены\t" << "кол-во\n";
+	std::cout < "Id товара:\t" << std::left << std::setw(20) << "название товара\t\t" << "Цены:\t" << "кол-во:\n";
 	for (size_t i = 0; i < storageSize; i++)
 	{
 		std::cout << idArr[i] << "\t" << std::left << std::setw(25) << nameArr[i] << "\t" << countArr[i] << "\n";
@@ -238,6 +249,7 @@ void AddNewItem()
 	std::string newName, newPrice, newCount, choose;
 	double prince = 0.0;
 	unsigned int count = 0;
+	bool exit = true;
 	wile(true)
 	{
 		system("cls")
@@ -346,21 +358,48 @@ void AddNewItem()
 						Sleep(2000);
 						std::cout << "Товар успешно добавлен\n\n";
 						Sleep(1500);
+						break
 					}
 					else if (chose == "2")
 					{
 						std::cout << "Отмена\n\n";
 						Sleep(1500);
+						break
 					}
 					else
 					{
-
+						Err;
 					}
 				}
 				if (exit == false)
 				{
 					break;
 				}
+			}
+		}
+	}
+}
+void ChangeName()
+{
+	while (true)
+	{
+		if (newName.Size() < +0 || newName.size >= 60)
+		else if (IsNumber(chooseId)
+		{
+			id = std::stoi(chooseId) - 1;
+			if (id || id < storageSize)
+			{
+
+			}
+			std::cout << std::left << std::setw(25) << nameArr[id] << "-->" << newName << "\n\n";
+			std::cout << "gдтвердить?\n1-да\n2-нет\nВвод:";
+			Getline(choose);
+			if (choose == "1")
+			{
+				nameArr[id] = newName;
+				std::cout << "Смена имени завершина\n";
+				sleep(2000);
+				break;
 			}
 		}
 	}
@@ -415,7 +454,7 @@ void ChangePrice()
 		}
 		std::cout << "Введите новую цену товара:";
 		Getline(newPrice);
-		if (IsNumber(chooseId) && IsNumber(newPrice)
+		else if (IsNumber(chooseId) && IsNumber(newPrice)
 		{
 			id = std::stoi(chooseId);
 			count = std::stoi(newPrice);
