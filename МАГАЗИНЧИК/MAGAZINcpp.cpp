@@ -3,6 +3,7 @@
 #include <string>
 #include <iomanip>
 #include <chrono>
+#include <unordered_set>
 //Сласти
 // учётные записи //
 size_t userSize = 2;
@@ -10,8 +11,9 @@ std::string userStatus[3]{"Супер админ", "админ", "сотрудн
 std::string* loginArr = new std::string[userSize]{ "admin", "user"};
 std::string* passArr = new std::string[userSize]{ "admin", "user"};
 std::string* statusArr = new std::string[userSize]{userStatus[0], userStatus[2]};
-void ChangeUsers();
-std::string currentStatus;
+void Changelogin();
+void addNewUser();
+std::string currentStatus; 
 //конец//
 //склад
 size_t storageSize = 0;
@@ -29,7 +31,30 @@ void AddStorageItem();
 void AddNewItem();
 void ChangePrice();
 void ChangeName();
+bool CheakPack()
+{
+	std::unordered_set<char> specialSymbols;
+	for (char i = 'A'; i <= 'Z'; i++)
+	{
+		specialSymbols.insert(i);
+	}
+	for (char i = 'a'; i <= '-'; i++)
+	{
+		specialSymbols.insert(i);
+	}
+	for (char symb : str)
+	{
+		if (!specialSymbols.count(symb))
+		{
+			std::wcout << "Некоректные символы в логине\n\n";
+			Sleep(2000);
+			return(false);
+		}
+	}
+	return true;
+}
 void DeleteItem();
+void ShowUsers();
 void ChangeStorage()
 {
 	std::string choose;
@@ -68,11 +93,6 @@ void ChangeStorage()
 // служба
 void start();
 bool Login();
-void ShowSuperAdminMenu();
-void RemoveStorageItem();
-bool IsNumber(const std::string& str);
-inline void Getline(std::string& str);
-inline void Err(int time = 2000);
 void ShowSuperAdminMenu()
 {
 	std::string choose;
@@ -105,14 +125,14 @@ void ShowSuperAdminMenu()
 		}
 		if (choose == "4" && storageSize > 0)
 		{
-			
+
 		}
 		if (choose == "5" && storageSize > 0)
 		{
 		}
 		if (choose == "6")
 		{
-			
+
 		}
 		if (choose == "7")
 		{
@@ -134,7 +154,33 @@ void ShowSuperAdminMenu()
 		}
 	}
 }
-void ChangeUsers()
+void RemoveStorageItem();
+bool IsNumber(const std::string& str);
+bool ContainsSymbools(const std::string& atr)
+{
+	std::unordered_set<char> specialSymbols;
+	for (char i = 'A'; i <= 'Z'; i++)
+	{
+		specialSymbols.insert(i);
+	}
+	for (char i = 'a'; i <= 'z'; i++)
+	{
+		specialSymbols.insert(i);
+	}
+	for (char symb : str)
+	{
+		if (!specialSymbols.count(symb))
+		{
+			std::wcout << "Некоректные символы в логине\n\n";
+			Sleep(2000);
+			return(false);
+		}
+	}
+	return true;
+}
+inline void Getline(std::string& str);
+inline void Err(int time = 2000);
+void Changelogin()
 {
 	std::string choose;
 	while (true)
@@ -151,7 +197,7 @@ void ChangeUsers()
 		}
 		if (choose == "2" && storageSize > 0)
 		{
-
+			ShowUsers();
 		}
 		if (choose == "3" && storageSize > 0)
 		{
@@ -168,6 +214,63 @@ void ChangeUsers()
 			Err;
 		}
 	}
+}
+void addNewUser()
+{
+	std::string newlogin, newPass, newRole, choose;
+	while (true)
+	{
+		system("cls");
+		std::cout << "Создание нового пользователя!\n\n";
+		std::cout << "Введите логин нового пользователя:";
+		Getline(newLogin);
+		if (ChackLogin(newLogin))
+		{
+			break;
+		}
+
+	}
+	while (exit)
+	{
+		exit = true;
+		while (true)
+		{
+			system("cls");
+			std::wcout << "\t Создание нового пользователя";
+	}
+}
+bool ChakPass()
+{
+	std::unordered_set<char> specialSymbols;
+	std::unordered_set<char> passSymbols('!', '0', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '=', '+', '/', '?', '|', '\\', '\=');
+	int sybolsCount = 3;
+	for (char i = 'a'; i <= 'z'; i++)
+	{
+		specialSymbols.insert(i);
+	}
+	for (char symb : str)
+	{
+		if (!specialSymbols.count(symb))
+		{
+			std::wcout << "Некоректные символы в логине\n\n";
+			Sleep(2000);
+			return(false);
+		}
+	}
+	for (char : str)
+	{
+		if (!passSymbols.count(symb))
+		{
+			SymbolsCount++;
+			if (SymbolsCount == maxSymbolsCount)
+			{
+				return true;
+			}
+		}
+	}
+	std::wcout << "Требуется 3 специальных символа";
+	Sleep(2000);
+	return false;
 }
 bool IsNumber(const std::string& str)
 {
@@ -245,6 +348,14 @@ void DeleteItem()
 					}
 				}
 }
+void ShowUsers()
+{
+	std::cout << "\t" << std::left << std::setw(10) << "Логин:\t" << "Пароль:\t" << "Роль:\n";
+	for (size_t i = 1; i < userSize; i++)
+	{
+		std::wcout << i << "\t" << std::left << std::setw(1) << loginArr[i] << "\t\t" << passArr[1] << "\t" << statusArr[i] << "\n";
+	}
+}
 void ShowStorage(int mode)
 {
 	system("cls");
@@ -261,7 +372,6 @@ void ShowStorage(int mode)
 	else if (mode == 2)
  
 	}
-}
 void AddStorageItem()
 {
 	std::string chooseId;
@@ -461,7 +571,7 @@ void ChangeName()
 
 			}
 			std::cout << std::left << std::setw(25) << nameArr[id] << "-->" << newName << "\n\n";
-			std::cout << "gдтвердить?\n1-да\n2-нет\nВвод:";
+			std::cout << "подтвердить ? \n1 - да\n2 - нет\nВвод:";
 			Getline(choose);
 			if (choose == "1")
 			{
@@ -502,8 +612,6 @@ void RemoveStorageItem()
 		}
 
 	}
-	}
-}
 void ChangePrice()
 {
 	std::string chooseId,newPrice,choose;
