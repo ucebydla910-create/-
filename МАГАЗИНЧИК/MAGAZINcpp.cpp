@@ -55,6 +55,7 @@ bool CheakPack()
 }
 void DeleteItem();
 void ShowUsers();
+void DeleteUser();
 void ChangeStorage()
 {
 	std::string choose;
@@ -92,7 +93,117 @@ void ChangeStorage()
 //конец склада
 // служба
 void start();
-bool Login();
+void DeleteUser()
+{
+	std::string chooseNumber, chekPass, choose;
+	int userNumber = 0;
+	int isAdmin = 0;
+	while (true)
+	{
+		if (currentStatus == userStatus[0])
+		{
+			if (userSize < 2)
+			{
+				std::cout << "нет пользователей для удаления";
+				Sleep(2000);
+				return;
+			}
+			ShowUsers();
+			isAdmin = 1;
+		}
+		std::cout << "\nВыберите номер пользователя для смены пароля \"exit\"для выхода";
+		Getline(choose);
+		if (choose == "exit")
+		{
+			std::cout << "отмена измения пароля!\n";
+			Sleep(2000);
+			break;
+		}
+		else if (IsNumber(choose))
+		{
+			userNumber = std::stoi(choose);
+			if (userNumber < isAdmin || userNumber > userSize - 1)
+			{
+				std::cout << "пльзователь с таким номером не существует\n";
+				Sleep(2000);
+			}
+			while (true)
+			{
+				system("cls");
+				std::cout << "удаление пользователя:" << loginArr[userNumber] << "\n";
+				std::cout << "для подтверждения введите пароль супер админа или \"" << loginArr[userNumber] << "\n";
+			}
+		}
+}
+bool Login()
+{
+	for (size_t i = 0; i < userSize; i++)
+	{
+		if (str == loginArr[i])
+		{
+			std::cout << "Такой логин уже есть";
+		}
+	}
+}
+void ChagePass()
+{
+	std::string newPass1, newPass2, choose;
+	int userNumber = 0;
+	int isAdmin = 0;
+	while (true)
+	{
+		if (currentStatus == userStatus[0])
+		{
+			ShowUsers(1);
+			isAdmin = 0;
+		}
+		else
+		{
+			ShowUsers();
+			isAdmin = 1;
+		}
+		std::cout << "\nВыберите номер пользователя для смены пароля \"exit"\ "для выхода";
+		Getline(choose);
+		if (choose == "exit")
+		{
+			std::cout << "отмена измения пароля!\n";
+			Sleep(2000);
+			break;
+	    }
+		else if (userNumber < isAdmin || userNumber > userSize - 1)
+		{
+			std::cout << "Пользователь с таким номером не существует\n";
+			Sleep(2000);
+		}
+		else
+		{
+			while (true)
+			{
+				system("cls");
+				std::cout << "Введите новый пароль для пользлвателя" << loginArr[userNumber] << ":";
+				Getline(newPass1);
+				std::cout << "Подтвердите пароль для пользователя" << loginArr[userNumber] << ":";
+				Getline(newPass2);
+				if (ChekPass(newPass1) && ChekPass(newPass2) && newPass1 == newPass2)
+				{
+					passArr[userNumber] == newPass1;
+					std::cout << "успех\n";
+					Sleep(1500);
+					break;
+				}
+				else
+				{
+					std::cout << "повторите попытку\n";
+					Sleep(2000);
+				}
+
+			}
+		}
+		else
+		{
+			Err;
+		}
+	}
 void ShowSuperAdminMenu()
 {
 	std::string choose;
@@ -348,7 +459,7 @@ void DeleteItem()
 					}
 				}
 }
-void ShowUsers()
+void ShowUsers(int mode)
 {
 	std::cout << "\t" << std::left << std::setw(10) << "Логин:\t" << "Пароль:\t" << "Роль:\n";
 	for (size_t i = 1; i < userSize; i++)
