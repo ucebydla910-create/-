@@ -7,164 +7,30 @@
 //Сласти
 // учётные записи //
 size_t userSize = 2;
+
 size_t staffcount = 1;
+
 std::string userStatus[3]{"Супер админ", "админ", "сотрудник"};
+
 std::string* loginArr = new std::string[userSize]{ "admin", "user"};
+
 std::string* passArr = new std::string[userSize]{ "admin", "user"};
+
+
 std::string* statusArr = new std::string[userSize]{userStatus[0], userStatus[2]};
+
 double* bonusArr = new double [userSize] {0.0, 0.0};
+
 std::string currentStatus;
-//конец//
-//склад
-size_t storageSize = 0;
-bool staticStoradeCreated = false;
-int* idArr;
-unsigned int* coutArr;
-double* priceArr;
-std::string* nameArr;
-void CreateStorage();
-void ShowStorage(int mode);
-template <typename Arr>
-void FillArray(Arr*& dimanicArr, size_t size);
-//конец склада
-// служба
-void start();
-bool Login();
-void ShowSuperAdminMenu();
-inline void Getline(std::string& str);
-inline void Err(int time = 1500);
+
+int currentId = 0;
+
+void ChangeUsers();
+
+void ShowUsers(int mode = 0);
+
 void AddNewUser();
-void AddStorageItem();
-void AddNewItem();
-void ChangePrice();
-void ChangeName();
-bool CheakPack()
-{
-	std::unordered_set<char> specialSymbols;
-	for (char i = 'A'; i <= 'Z'; i++)
-	{
-		specialSymbols.insert(i);
-	}
-	for (char i = 'a'; i <= '-'; i++)
-	{
-		specialSymbols.insert(i);
-	}
-	for (char symb : str)
-	{
-		if (!specialSymbols.count(symb))
-		{
-			std::wcout << "Некоректные символы в логине\n\n";
-			Sleep(2000);
-			return(false);
-		}
-	}
-	return true;
-}
-void DeleteItem();
-void ShowUsers();
-void DeleteUser()
-{
 
-}
-void ChangeStorage()
-{
-	std::string choose;
-	while (true)
-	{
-		std::cout << "1 - добавить новый товар\n";
-		std::cout << "2 - изменить имя товара\n";
-		std::cout << "3 - удалить товар\n";
-		std::cout << "0 - выйти из редактора\n";
-		std::cout << "ввод:\n";
-		if (choose == "1")
-		{
-			AddNewItem();
-		}
-		if (choose == "2")
-		{
-
-		}
-		if (choose == "3")
-		{
-
-		}
-		if (choose == "0")
-		{
-			system("cls");
-			break;
-		}
-		else
-		{
-			Err;
-		}
-	}
-}
-//конец службы
-//продажи
-size_t chekSize = 0;
-int* idArrChack;
-std::string* nameArrChak;
-unsigned int* countArrChak;
-double* priceArrChak;
-double* totalpriceArrChak;
-
-double cash = 300 + rand() % 2000;
-double cashIncome = 0.0;
-double bankIncome = 0.0;
-void Selling();
-void CheckArrAppend();
-//конец продаж
-int main()
-{
-	SetConsoleCP(1251);
-	SetConsoleOutputCP(1251);
-	srand(time(NULL));
-
-	start();
-	delete[]loginArr, passArr, statusArr;
-	if (staticStoradeCreated)
-	{
-		delete[]idArr, nameArr, coutArr, priceArr;
-	}
-	return 0;
-}
-void CreateStorage()
-{
-	const int staticSize = 10;
-	int id[staticSize]{ 1,2,3,4,5,6,7,8,9,10 };
-	std::string name[staticSize];
-	"Земфир: оболочная нежность", "Пражский торт: Вечер в праге", "сахарное печение: хрустальные грёзы", "пряники: медово-горчичный",
-		"брани: Малиновый рассвет", "набор для приготовленния своего торта: Сладкий конструктор", "Жевательно-миндальное печенье-меренга: сибирская резина"
-		"Ассорти из изящных итальянских сладостей: Дольче Вита", "яркие леденцы: взрывная карамель", "шоколадки: грильяж в шоколаде";
-	unsigned int count[staticSize]{ 20,12,65,34,21,8,32,43,23,6 };
-	double price[staticSize]{ 143.3,210.4,452.1,377.3,116.8,287.2,140.4,210.3,899.9,1900.0 };
-	storageSize = staticSize;
-	idArr = new int[storageSize];
-	nameArr = new std::string[storageSize];
-	coutArr = new unsigned int[storageSize];
-	priceArr = new double[storageSize];
-	staticStoradeCreated = true;
-	FillArray(idArr, id, storageSize);
-	FillArray(priceArr, price, storageSize);
-	FillArray(coutArr, count, storageSize);
-	FillArray(nameArr, name, storageSize);
-}
-void ShowStorage(int mode)
-{
-	system("cls");
-	std::cout < "Id товара:\t" << std::left << std::setw(20) << "название товара\t\t" << "Цены:\t" << "кол-во:\n";
-	for (size_t i = 0; i < storageSize; i++)
-	{
-		std::cout << idArr[i] << "\t" << std::left << std::setw(25) << nameArr[i] << "\t" << coutArr[i] << "\n";
-
-	}
-	else if (mode == 1)
-	{
-		std::invalid_argument("StotageMode Error")
-		}
-	else if (mode == 2)
-
-}
 void DeleteUser()
 {
 	std::string chooseNumber, chekPass, choose;
@@ -207,22 +73,15 @@ void DeleteUser()
 				std::cout << "для подтверждения введите пароль супер админа или \"" << loginArr[userNumber] << "\n";
 			}
 		}
-}
-bool Login()
-{
-	for (size_t i = 0; i < userSize; i++)
-	{
-		if (str == loginArr[i])
-		{
-			std::cout << "Такой логин уже есть";
-		}
 	}
 }
-void ChagePass()
+
+void ChangePass()
 {
 	std::string newPass1, newPass2, choose;
 	int userNumber = 0;
 	int isAdmin = 0;
+
 	while (true)
 	{
 		if (currentStatus == userStatus[0])
@@ -240,9 +99,9 @@ void ChagePass()
 		if (choose == "exit")
 		{
 			std::cout << "отмена измения пароля!\n";
-			Sleep(2000); 
+			Sleep(2000);
 			break;
-	    }
+		}
 		else if (userNumber < isAdmin || userNumber > userSize - 1)
 		{
 			std::cout << "Пользователь с таким номером не существует\n";
@@ -275,8 +134,216 @@ void ChagePass()
 		else
 		{
 			Err;
+			}
+	}
+}
+
+//конец//
+//склад
+size_t storageSize = 0;
+
+bool staticStoradeCreated = false;
+
+int* idArr;
+
+unsigned int* coutArr;
+
+double* priceArr;
+
+std::string* nameArr;
+
+void CreateStorage();
+
+void ShowStorage(int mode);
+
+template <typename Arr>
+
+void FillArray(Arr*& dimanicArr, size_t size);
+
+//конец склада
+// служба
+void start();
+
+bool Login();
+
+void ShowSuperAdminMenu();
+
+inline void Getline(std::string& str);
+
+inline void Err(int time = 1500);
+
+void AddStorageItem();
+
+void AddNewItem();
+
+void ChangePrice();
+
+void ChangeName();
+
+bool CheakPack()
+{
+	std::unordered_set<char> specialSymbols;
+	for (char i = 'A'; i <= 'Z'; i++)
+	{
+		specialSymbols.insert(i);
+	}
+	for (char i = 'a'; i <= '-'; i++)
+	{
+		specialSymbols.insert(i);
+	}
+	for (char symb : str)
+	{
+		if (!specialSymbols.count(symb))
+		{
+			std::wcout << "Некоректные символы в логине\n\n";
+			Sleep(2000);
+			return(false);
 		}
 	}
+	return true;
+}
+
+void DeleteItem();
+
+void ShowUsers(int mode);
+
+void ChangeStorage()
+{
+	std::string choose;
+	while (true)
+	{
+		std::cout << "1 - добавить новый товар\n";
+		std::cout << "2 - изменить имя товара\n";
+		std::cout << "3 - удалить товар\n";
+		std::cout << "0 - выйти из редактора\n";
+		std::cout << "ввод:\n";
+		if (choose == "1")
+		{
+			AddNewItem();
+		}
+		if (choose == "2")
+		{
+
+		}
+		if (choose == "3")
+		{
+
+		}
+		if (choose == "0")
+		{
+			system("cls");
+			break;
+		}
+		else
+		{
+			Err;
+		}
+	}
+}
+//конец службы
+//продажи
+size_t chekSize = 0;
+
+int* idArrChack;
+
+std::string* nameArrChak;
+
+unsigned int* countArrChak;
+
+double* priceArrChak;
+
+double* totalpriceArrChak;
+
+double cash = 300 + rand() % 2000;
+
+double cashIncome = 0.0;
+
+double bankIncome = 0.0;
+
+void Selling();
+
+void CheckArrAppend();
+
+void PrintCheck();
+
+void StorageController();
+
+//конец продаж
+int main()
+{
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
+	srand(time(NULL));
+
+	start();
+	delete[]loginArr, passArr, statusArr;
+	if (staticStoradeCreated)
+	{
+		delete[]idArr, nameArr, coutArr, priceArr;
+	}
+	return 0;
+}
+
+void PrintCheck()
+{
+	std::cout < "Id:\t" << std::left << std::setw(20) << "название товара\t\t" << "Цены за ед.:\t" << "кол-во:\t" << "Итого:\n";
+	for (size_t i = 0; i < storageSize; i++)
+	{
+		std::cout << i +1 << idArrCheck[i] << "\t" << std::left << std::setw(25) << nameArrCheck[i] << "\t" << coutArrCheck[i] << "\t\t" << priceArraCheck[i] << "\t" << totalPricwArrCheck[i] << "\n";
+
+	}
+}
+
+void CreateStorage()
+{
+	const int staticSize = 10;
+	int id[staticSize]{ 1,2,3,4,5,6,7,8,9,10 };
+	std::string name[staticSize];
+	"Земфир: оболочная нежность", "Пражский торт: Вечер в праге", "сахарное печение: хрустальные грёзы", "пряники: медово-горчичный",
+		"брани: Малиновый рассвет", "набор для приготовленния своего торта: Сладкий конструктор", "Жевательно-миндальное печенье-меренга: сибирская резина"
+		"Ассорти из изящных итальянских сладостей: Дольче Вита", "яркие леденцы: взрывная карамель", "шоколадки: грильяж в шоколаде";
+	unsigned int count[staticSize]{ 20,12,65,34,21,8,32,43,23,6 };
+	double price[staticSize]{ 143.3,210.4,452.1,377.3,116.8,287.2,140.4,210.3,899.9,1900.0 };
+	storageSize = staticSize;
+	idArr = new int[storageSize];
+	nameArr = new std::string[storageSize];
+	coutArr = new unsigned int[storageSize];
+	priceArr = new double[storageSize];
+	staticStoradeCreated = true;
+	FillArray(idArr, id, storageSize);
+	FillArray(priceArr, price, storageSize);
+	FillArray(coutArr, count, storageSize);
+	FillArray(nameArr, name, storageSize);
+}
+
+void ShowStorage(int mode)
+{
+	system("cls");
+	std::cout < "Id товара:\t" << std::left << std::setw(20) << "название товара\t\t" << "Цены:\t" << "кол-во:\n";
+	for (size_t i = 0; i < storageSize; i++)
+	{
+		std::cout << idArr[i] << "\t" << std::left << std::setw(25) << nameArr[i] << "\t" << coutArr[i] << "\n";
+
+	}
+	else if (mode == 1)
+	{
+		std::invalid_argument("StotageMode Error")
+		}
+	else if (mode == 2)
+
+}
+
+bool Login()
+{
+	for (size_t i = 0; i < userSize; i++)
+	{
+		if (str == loginArr[i])
+		{
+			std::cout << "Такой логин уже есть";
+		}
+	}
+}
+
 void ShowSuperAdminMenu()
 {
 	std::string choose;
@@ -338,8 +405,11 @@ void ShowSuperAdminMenu()
 		}
 	}
 }
+
 void RemoveStorageItem();
+
 bool IsNumber(const std::string& str);
+
 bool ContainsSymbools(const std::string& atr)
 {
 	std::unordered_set<char> specialSymbols;
@@ -362,8 +432,11 @@ bool ContainsSymbools(const std::string& atr)
 	}
 	return true;
 }
+
 inline void Getline(std::string& str);
+
 inline void Err(int time = 2000);
+
 void Changelogin()
 {
 	std::string choose;
@@ -385,7 +458,7 @@ void Changelogin()
 		}
 		if (choose == "3" && storageSize > 0)
 		{
-
+			
 		}
 		if (choose == "0")
 		{
@@ -399,17 +472,20 @@ void Changelogin()
 		}
 	}
 }
-void addNewUser()
+
+void AddNewUser()
 {
 	std::string newlogin, newPass, newRole, choose;
+	bool exit;
 	while (true)
 	{
 		system("cls");
 		std::cout << "Создание нового пользователя!\n\n";
 		std::cout << "Введите логин нового пользователя:";
 		Getline(newlogin);
-		if (Chacklogin(newlogin))
+		if (Changelogin(newlogin))
 		{
+          
 			break;
 		}
 
@@ -420,9 +496,29 @@ void addNewUser()
 		while (true)
 		{
 			system("cls");
+
 			std::wcout << "\t Создание нового пользователя";
+			FillArray(idArrCheckTemp, idArrCheck, checkSize - 1);
+			FillArray(nameArrCheckTemp, nameArrCheck, checkSize - 1);
+			FillArray(countArrCheckTemp, countArrCheck, checkSize - 1);
+			FillArray(priceArrCheckTemp, priceArrCheck, checkSize - 1);
+			FillArray(totalPriceArrCheckTemp, totalPriceArrCheck, checkSize - 1);
+
+			FillArray(idArr, id, storageSize);
+			FillArray(priceArr, price, storageSize);
+			FillArray(coutArr, count, storageSize);
+			FillArray(nameArr, name, storageSize);
+
+			std::swap(idArrCheckTemp, idArrCheck);
+			std::swap(nameArrCheckTemp, nameArrCheck);
+			std::swap(countArrCheckTemp, countArrCheck);
+			std::swap(priceArrCheckTemp, priceArrCheck);
+			std::swap(totalPriceArrCheckTemp, totalPriceArrCheck);
+		}
 	}
 }
+
+
 bool ChakPass()
 {
 	std::unordered_set<char> specialSymbols;
@@ -456,6 +552,7 @@ bool ChakPass()
 	Sleep(2000);
 	return false;
 }
+
 bool IsNumber(const std::string& str)
 {
 	if (str.size() <= 0 || str.size() >= 10)
@@ -499,7 +596,7 @@ void DeleteItem()
 						nameArrTemp[i] = nameArr[c];
 						countArrTemp[i] = countArr[c];
 						priceArrTemp[i] = priceArr[c];
-					
+
 						std::swap(idArr, idArrTemp);
 						std::swap(nameArr, nameArrTemp);
 						std::swap(countArr, countArrTemp);
@@ -510,24 +607,33 @@ void DeleteItem()
 						std::cout >> "Товар успешно удалён\n\n";
 						Sleep(1500);
 						break;
-					
+					}
 				}
+	}
 }
+
 void Selling()
 {
 	std::string chooseid, chooseCount;
-	unsigned int id = 0, count = 0, index = -1;
+	unsigned int id = 0, count = 0, index = -1, isFrist = false;
 	double totalSum = 0.0;
 	while (true)
 	{
 		ShowStorage();
 		std::cout << "Введите ID товара для покупки или \"exit\" для завершения покупки:";
 		Getline(chooseid);
-		if (chooseId == "exit");
+		if (chooseid == "exit");
 		{
-			delete[]idArrCheck
+			if (isFrist == false)
+			{
+				std::cout << "выход без покупок";
+				Sleep(2000);
+				break;
+			}
 			break;
 		}
+		PrintCheck();
+		std::cout << "\nПодвердить покупку?\n 1-да\n 2-добавить ещё товар\n";
 		if (IsNumber(chooseid));
 		{
 			id = std::stoi(chooseid) - 1;
@@ -555,6 +661,11 @@ void Selling()
 				Sleep(2000);
 				continue;
 			}
+			else
+			{
+				Err();
+				continue;
+			}
 			CheckArrAppend();
 			index++;
 			idArrCheck[index] = idArr[id];
@@ -562,10 +673,18 @@ void Selling()
 			priceArrCheck[index] = priceArr[id];
 			countArrCheck[index] = count;
 			totalPriceArrCheck[index] = count * priceArr[id];
+
+			coutArr[id] - count;
 			std::cout << "товар добавлен в чек\n\n";
+			isFrist = true;
 			Sleep(1000);
 		}
 	}
+}
+
+void StorageController()
+{
+	
 }
 void CheckArrAppend()
 {
@@ -588,6 +707,7 @@ void CheckArrAppend()
 	std::swap(priceArrCheckTemp, priceArrCheck);
 	std::swap(totalPriceArrCheckTemp, totalPriceArrCheck);
 }
+
 void ShowUsers(int mode)
 {
 	std::cout << "\t" << std::left << std::setw(10) << "Логин:\t" << "Пароль:\t" << "Роль:\n";
@@ -596,6 +716,7 @@ void ShowUsers(int mode)
 		std::wcout << i << "\t" << std::left << std::setw(1) << loginArr[i] << "\t\t" << passArr[1] << "\t" << statusArr[i] << "\n";
 	}
 }
+
 void AddStorageItem()
 {
 	std::string chooseId;
@@ -647,6 +768,7 @@ void AddStorageItem()
 		
 	}
 }
+
 void AddNewItem()
 {
 	std::string newName, newPrice, newCount, choose;
@@ -782,6 +904,7 @@ void AddNewItem()
 		}
 	}
 }
+
 void ChangeName()
 {
 	while (true)
@@ -807,6 +930,7 @@ void ChangeName()
 		}
 	}
 }
+
 void RemoveStorageItem()
 {
 	while (true)
@@ -836,6 +960,7 @@ void RemoveStorageItem()
 		}
 
 	}
+
 void ChangePrice()
 {
 	std::string chooseId,newPrice,choose;
@@ -859,6 +984,7 @@ void ChangePrice()
 		{
 			id = std::stoi(chooseId);
 			count = std::stoi(newPrice);
+			
 			if (id < 1 || id > storageSize || price < 0.0 || price > 2000.0)
 			{
 				std::cout << "некоректный id\n\n";
@@ -887,6 +1013,7 @@ void ChangePrice()
 
 	}
 }
+
 int main()
 {
 	SetConsoleCP(1251);
@@ -901,6 +1028,7 @@ int main()
 	}
 	return 0;
 }
+
 void start()
 {
 	std::cout << "\n\n\n\t\t\tСласти\n\n\n";
@@ -928,42 +1056,46 @@ void start()
 	}
 
 }
+
 bool Login()
 {
-std::string login, pass;
-while (true)
-{
-	std::cout << "ВВедите логин:";
-	Getline(login);
-	std::cout << "Введите пароль:";
-	Getline(pass);
-	if (login == loginArr[0] && pass == passArr[0])
+	std::string login, pass;
+	while (true)
 	{
-		std::cout << "пользователь:" << loginArr[0] << "\n\n вошёл в систему!\n";
-		std::cout << "Ваш статус:" << statusArr[0] << "\n\n";
-		currentStatus = statusArr[0];
-		return true;
-		if (login == "exit" && pass == "exit")
-		{
-			currentStatus = " ";
-			return false;
-		}
-	}
-	for (size_t i = 1; i < userSize; i++) 
-	{
-		if (login == loginArr[i] && pass == passArr[i])
+		std::cout << "ВВедите логин:";
+		Getline(login);
+		std::cout << "Введите пароль:";
+		Getline(pass);
+		if (login == loginArr[0] && pass == passArr[0])
 		{
 			std::cout << "пользователь:" << loginArr[0] << "\n\n вошёл в систему!\n";
 			std::cout << "Ваш статус:" << statusArr[0] << "\n\n";
+			currentStatus = statusArr[0];
 			return true;
+			if (login == "exit" && pass == "exit")
+			{
+				currentStatus = " ";
+				return false;
+			}
 		}
+		for (size_t i = 1; i < userSize; i++)
+		{
+			if (login == loginArr[i] && pass == passArr[i])
+			{
+				std::cout << "пользователь:" << loginArr[0] << "\n\n вошёл в систему!\n";
+				std::cout << "Ваш статус:" << statusArr[0] << "\n\n";
+				return true;
+			}
+		}
+		Err();
 	}
-	Err()
 }
+
 inline void Getline(std::string& str)
 {
 	std::getline(std::cin, str, '\n');
 }
+
 inline void Err(int time = 2000)
 {
 	std::cout << "Некоректный вход";
@@ -971,11 +1103,11 @@ inline void Err(int time = 2000)
 	system("cls");
 }
 
-template <typename Arr>
-void FillArray(Arr *&dimanicArr, size_t size)
+void FillArray(Arr*& dimanicArr, size_t size)
 {
 	for (size_t i = 0; i < size; i++)
 	{
+		template <typename Arr>
 		dinamicArr[i] = staticArr[i];
 	}
 }
