@@ -2,31 +2,29 @@
 #include <Windows.h>
 #include <string>
 #include <iomanip>
-#include <chmdo>
 #include <unordered_set>
-#include "Storage.hpp"
+#include "Storage.hp"
+#include <chrono>
 //Сласти
 // учётные записи //
 size_t userSize = 2;
 
 size_t staffcount = 1;
 
-std::string userStatus[3]{"Супер админ", "админ", "сотрудник"};
+std::string userStatus[3]{ "Супер админ", "админ", "сотрудник" };
 
-std::string* loginArr = new std::string[userSize]{ "admin", "user"};
+std::string* loginArr = new std::string[userSize]{ "admin", "user" };
 
-std::string* passArr = new std::string[userSize]{ "admin", "user"};
+std::string* passArr = new std::string[userSize]{ "admin", "user" };
 
 
-std::string* statusArr = new std::string[userSize]{userStatus[0], userStatus[2]};
+std::string* statusArr = new std::string[userSize]{ userStatus[0], userStatus[2] };
 
 double* bonusArr = new double [userSize] {0.0, 0.0};
 
 std::string currentStatus;
 
 int currentId = 0;
-
-void ChangeUsers();
 
 void ShowUsers(int mode = 0);
 
@@ -71,7 +69,7 @@ void DeleteUser()
 			{
 				system("cls");
 				std::cout << "удаление пользователя:" << loginArr[userNumber] << "\n";
-				std::cout << "для подтверждения введите пароль супер админа или \"" << loginArr[userNumber] << "\n";
+				std::cout << "для подтверждения введите пароль супер админа или \" "<< loginArr[userNumber] << "\n";
 			}
 		}
 	}
@@ -95,7 +93,7 @@ void ChangePass()
 			ShowUsers();
 			isAdmin = 1;
 		}
-		std::cout << "\nВыберите номер пользователя для смены пароля \"exit"\ "для выхода";
+		std::cout << "\nВыберите номер пользователя для смены пароля \"exit\" для выхода";
 		Getline(choose);
 		if (choose == "exit")
 		{
@@ -129,13 +127,12 @@ void ChangePass()
 					std::cout << "повторите попытку\n";
 					Sleep(2000);
 				}
-
+				else 
+				{
+					Err;
+				}
 			}
 		}
-		else
-		{
-			Err;
-			}
 	}
 }
 
@@ -323,8 +320,7 @@ void PrintCheck()
 	std::cout < "Id:\t" << std::left << std::setw(20) << "название товара\t\t" << "Цены за ед.:\t" << "кол-во:\t" << "Итого:\n";
 	for (size_t i = 0; i < storageSize; i++)
 	{
-		std::cout << i +1 << idArrCheck[i] << "\t" << std::left << std::setw(25) << nameArrCheck[i] << "\t" << coutArrCheck[i] << "\t\t" << priceArrCheck[i] << "\t" << totalPriceArrCheck[i] << "\n";
-
+		std::cout << i + 1 << idArrCheck[i] << "\t" << std::left << std::setw(25) << nameArrCheck[i] << "\t" << coutArrCheck[i] << "\t\t" << priceArrCheck[i] << "\t" << totalPriceArrCheck[i] << "\n";
 	}
 }
 
@@ -360,7 +356,7 @@ void ShowStorage(int mode)
 		else if (mode == 1)
 		{
 			std::invalid_argument("StotageMode Error")
-			}
+		}
 		else if (mode == 2)
 		{
 
@@ -485,7 +481,7 @@ void Changelogin()
 		std::cout << "ввод:\n";
 		if (choose == "1")
 		{
-		
+
 		}
 		if (choose == "2" && storageSize > 0)
 		{
@@ -493,7 +489,7 @@ void Changelogin()
 		}
 		if (choose == "3" && storageSize > 0)
 		{
-			
+
 		}
 		if (choose == "0")
 		{
@@ -520,8 +516,7 @@ void AddNewUser()
 		Getline(newlogin);
 		if (Changelogin(newlogin))
 		{
-          
-			break;
+            break;
 		}
 
 	}
@@ -616,39 +611,40 @@ void DeleteItem()
 		{
 			if (id < 0 || id > storageSize - 1)
 			{
-			   else
-			   {
-				  if (choose == "1")
-				  {
-					  std::string* nameArrTemp = new std::string[storageSize];
-					  unsigned int* countArrTemp = new unsigned int[storageSize];
-					  double* priceArrTemp = new double[storageSize];
-					  for (size_t i = 0, c = 0; i < storageSize; i++, c++)
-					  {
-						  if (id == c)
-						  {
-						    	c++;
-						  }
-						  idArrTemp[i] = i + 1;
-						  nameArrTemp[i] = nameArr[c];
-						  countArrTemp[i] = coutArr[c];
-						  priceArrTemp[i] = priceArr[c];
+			else
+			{
+				if (choose == "1")
+				{
+					std::string* nameArrTemp = new std::string[storageSize];
+					unsigned int* countArrTemp = new unsigned int[storageSize];
+					double* priceArrTemp = new double[storageSize];
+					for (size_t i = 0, c = 0; i < storageSize; i++, c++)
+					{
+						if (id == c)
+						{
+							c++;
+						}
+						idArrTemp[i] = i + 1;
+						nameArrTemp[i] = nameArr[c];
+						countArrTemp[i] = coutArr[c];
+						priceArrTemp[i] = priceArr[c];
 
-						  std::swap(idArr, idArrTemp);
-						  std::swap(nameArr, nameArrTemp);
-						  std::swap(coutArr, countArrTemp);
-						  std::swap(priceArr, priceArrTemp);
-						  delete[]idArrTemp, nameArrTemp, countArrTemp, priceArrTemp;
-						  std::cout << "Идёт подготовка";
-						  Sleep(2000);
-						  std::cout << "Товар успешно удалён\n\n";
-						  Sleep(1500);
-						  break;
-					  }
-				  }
-			   }
+						std::swap(idArr, idArrTemp);
+						std::swap(nameArr, nameArrTemp);
+						std::swap(coutArr, countArrTemp);
+						std::swap(priceArr, priceArrTemp);
+						delete[]idArrTemp, nameArrTemp, countArrTemp, priceArrTemp;
+						std::cout << "Идёт подготовка";
+						Sleep(2000);
+						std::cout << "Товар успешно удалён\n\n";
+						Sleep(1500);
+						break;
+					}
+				}
+			}
 			}
 		}
+		
 	}
 }
 
@@ -695,7 +691,7 @@ void Selling()
 		if (IsNumber(chooseCount))
 		{
 			count = std::stoi(chooseCount);
-			if (count < 0 || count > storageSize - l)
+			if (count < 0 || count > storageSize - 1)
 			{
 				std::cout << "ошибка ID";
 				Sleep(2000);
@@ -724,7 +720,7 @@ void Selling()
 
 void StorageController()
 {
-	
+
 }
 
 void CheckArrAppend()
@@ -754,7 +750,7 @@ void ShowUsers(int mode)
 	std::cout << "\t" << std::left << std::setw(10) << "Логин:\t" << "Пароль:\t" << "Роль:\n";
 	for (size_t i = 1; i < userSize; i++)
 	{
-		std::wcout << i << "\t" << std::left << std::setw(1) << loginArr[i] << "\t\t" << passArr[1] << "\t" << statusArr[i] << "\n";
+		std::cout << i << "\t" << std::left << std::setw(1) << loginArr[i] << "\t\t" << passArr[1] << "\t" << statusArr[i] << "\n";
 	}
 }
 
@@ -775,30 +771,30 @@ void AddStorageItem()
 			std::cout << "отмена операции пополнения";
 			break;
 		}
-		if (IsNumber(chooseId) && IsNumber(chooseCount)
+		if (IsNumber(chooseId) && IsNumber(chooseCount))
 		{
 			std::cout << "Введите колличество товара для его пополнения:";
 			Getline(chooseCount);
 			id = std::stoi(chooseId);
 			count = std::stoi(chooseCount);
-			if (id < 1 || id > storageSize || cout < 0 || count > 199)
+			if (id < 1 || id > storageSize || count < 0 || count > 199)
 			{
 				std::cout << "некоректный id\n\n";
-				std::cout << idArr[i] << "\t" << std::left << std::setw(25) << nameArr[id] << "\t" << countArr[id] << "-->" << countAA[id] + count << "\n\n";
+				std::cout << idArr[id] << "\t" << std::left << std::setw(25) << nameArr[id] << "\t" << coutArr[id] << "-->" << coutArr[id] + count << "\n\n";
 				std::cout << "подтвердить?\n 1-да 2-нет\nвывод:";
 				Getline(choose);
 				if (choose == "1")
 				{
-					countArr[id] += count;
-				std:cout << "товар успешно пополнен";
-					sleep(1500);
+					coutArr[id] += count;
+				std::cout << "товар успешно пополнен";
+					Sleep(1500);
 					system("cls");
-					break
+					break;
 				}
 				else if (choose = "2")
 				{
 					std::cout << "некоректный ввод\n";
-					sleep(1500);
+					Sleep(1500);
 				}
 				else
 				{
@@ -815,7 +811,7 @@ void AddNewItem()
 	double prince = 0.0;
 	unsigned int count = 0;
 	bool exit = true;
-	while(true)
+	while (true)
 	{
 		system("cls");
 		std::cout << "\t добавление нового товара!\n\nВведите\"exit\" для прекращения операции";
@@ -835,7 +831,7 @@ void AddNewItem()
 		else
 		{
 			break;
-	    }
+		}
 		while (exit)
 		{
 			system("cls");
@@ -906,30 +902,30 @@ void AddNewItem()
 						double* priceArrTemp = new double[storageSize];
 						FillArray(idArrTemp, idArr, storageSize - 1);
 						FillArray(nameArrTemp, nameArr, storageSize - 1);
-						FillArray(icoutArrTemp, coutArr, storageSize - 1);
+						FillArray(coutArrTemp, coutArr, storageSize - 1);
 						FillArray(priceArrTemp, priceArr, storageSize - 1);
-						
+
 						idArrTemp[storageSize - 1] = storageSize;
 						nameArrTemp[storageSize - 1] = newName;
-						countArrTemp[storageSize - 1] = count;
+						coutArrTemp[storageSize - 1] = count;
 						priceArrTemp[storageSize - 1] = price;
 
 						std::swap(idArr, idArrTemp);
 						std::swap(nameArr, nameArrTemp);
-						std::swap(countArr, countArrTemp);
+						std::swap(coutArr, coutArrTemp);
 						std::swap(priceArr, priceArrTemp);
-						delete[]idArrTemp, nameArrTemp, countArrTemp, priceArrTemp;
+						delete[]idArrTemp, nameArrTemp, coutArrTemp, priceArrTemp;
 						std::cout << "Идёт подготовка";
 						Sleep(2000);
 						std::cout << "Товар успешно добавлен\n\n";
 						Sleep(1500);
-						break
+						break;
 					}
-					else if (chose == "2")
+					else if (choose == "2")
 					{
 						std::cout << "Отмена\n\n";
 						Sleep(1500);
-						break
+						break;
 					}
 					else
 					{
@@ -950,6 +946,7 @@ void ChangeName()
 	while (true)
 	{
 		if (newName.Size() < +0 || newName.size >= 60)
+		{
 		else if (IsNumber(chooseId)
 		{
 			id = std::stoi(chooseId) - 1;
@@ -958,15 +955,16 @@ void ChangeName()
 
 			}
 			std::cout << std::left << std::setw(25) << nameArr[id] << "-->" << newName << "\n\n";
-			std::cout << "подтвердить ? \n1 - да\n2 - нет\nВвод:";
-			Getline(choose);
-			if (choose == "1")
-			{
-				nameArr[id] = newName;
-				std::cout << "Смена имени завершина\n";
-				sleep(2000);
-				break;
-			}
+				std::cout << "подтвердить ? \n1 - да\n2 - нет\nВвод:";
+				Getline(choose);
+				if (choose == "1")
+				{
+					nameArr[id] = newName;
+					std::cout << "Смена имени завершина\n";
+					sleep(2000);
+					break;
+				}
+		}
 		}
 	}
 }
@@ -984,34 +982,34 @@ void RemoveStorageItem()
 	while (true)
 	{
 		std::cout << "Введите колличество товара для списания";
-		Getline(chooseCount) - 1;
-		if (IsNumber(chooseId) && IsNumber(chooseCount)
+		Getline(chooseCout) - 1;
+		if (IsNumber(chooseId) && IsNumber(chooseCout))
 		{
 			id = std::stoi(chooseId);
 			count = std::stoi(chooseCount);
-			if (id < 0 || id > storageSize - 1 || cout < 0 || countArr[id])
+			if (id < 0 || id > storageSize - 1 || cout < 0 || coutArr[id])
 			{
-			std::cout << "некоректный id или колличество\\n";
-			sleep(1500);
-			if (choose == "1")
+				std::cout << "некоректный id или колличество\\n";
+				Sleep(1500);
+				if (choose == "1")
 			}
-				else if (choose = "2")
-				{
-					std::cout << "некоректный ввод\n";
-					sleep(1500);
-				}
-				else
-				{
-					Err();
-				}
+			else if (choose = "2")
+			{
+				std::cout << "некоректный ввод\n";
+				Sleep(1500);
+			}
+			else
+			{
+				Err();
 			}
 		}
-
 	}
+
+}
 
 void ChangePrice()
 {
-	std::string chooseId,newPrice,choose;
+	std::string chooseId, newPrice, choose;
 	int id = 0;
 	double prince = 0.0;
 	unsigned int count = 0;
@@ -1032,7 +1030,7 @@ void ChangePrice()
 			Getline(newPrice);
 			id = std::stoi(chooseId);
 			count = std::stoi(newPrice);
-			
+
 			if (id < 1 || id > storageSize || price < 0.0 || price > 2000.0)
 			{
 				std::cout << "некоректный id\n\n";
@@ -1042,7 +1040,7 @@ void ChangePrice()
 				if (choose == "1")
 				{
 					coutArr[id] += count;
-				    std:cout << "товар успешно пополнен";
+				std:cout << "товар успешно пополнен";
 					Sleep(1500);
 					system("cls");
 					break
