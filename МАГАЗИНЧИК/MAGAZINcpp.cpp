@@ -137,7 +137,7 @@ void ChangePass()
 }
 
 //конец//
-//склад
+// //склад
 size_t storageSize = 0;
 
 bool staticStoradeCreated = false;
@@ -557,7 +557,7 @@ bool ChakPass()
 	{
 		specialSymbols.insert(i);
 	}
-	for (char symb : str)
+	for (char symb str)
 	{
 		if (!specialSymbols.count(symb))
 		{
@@ -566,7 +566,7 @@ bool ChakPass()
 			return(false);
 		}
 	}
-	for (char : str)
+	for (char str)
 	{
 		if (!passSymbols.count(symb))
 		{
@@ -710,7 +710,7 @@ void Selling()
 			countArrCheck[index] = count;
 			totalPriceArrCheck[index] = count * priceArr[id];
 
-			coutArr[id] - count;
+			coutArr[id] = count;
 			std::cout << "товар добавлен в чек\n\n";
 			isFrist = true;
 			Sleep(1000);
@@ -983,7 +983,7 @@ void RemoveStorageItem()
 	{
 		std::cout << "Введите колличество товара для списания";
 		Getline(chooseCout) - 1;
-		if (IsNumber(chooseId) && IsNumber(chooseCout))
+		if (IsNumber(chooseid) && IsNumber(chooseCout))
 		{
 			id = std::stoi(chooseId);
 			count = std::stoi(chooseCount);
@@ -1134,7 +1134,7 @@ inline void Err(int time = 2000)
 	system("cls");
 }
 
-void FillArray(Arr*& dimanicArr, size_t size)
+void FillArray (Arr*& dimanicArr, size_t size)
 {
 	for (size_t i = 0; i < size; i++)
 	{
