@@ -124,11 +124,6 @@ void ChangePass()
 				}
 			}
 		}
-		else if (userNumber < isAdmin || userNumber > userSize - 1)
-		{
-			std::cout << "Пользователь с таким номером не существует\n";
-			Sleep(2000);
-		}
 	}
 }
 void DeleteUser();
@@ -856,11 +851,10 @@ void DeleteUser()
 		else if (IsNumber(choose))
 		{
 			if (userNumber < isAdmin || userNumber > userSize - 1)
-			{
-				std::cout << "пользователя сс таким номером нет!\n";
-				Sleep(1500);
-				break;
-			}
+		    {
+			   std::cout << "Пользователь с таким номером не существует\n";
+			   Sleep(2000);
+		    }
 		}
 		}
 		while (true)
@@ -874,10 +868,10 @@ void DeleteUser()
 				Sleep(1500);
 				break;
 			}
+			Getline(checkPass);
 			if (checkPass == "exit")
 			{
-				Getline(checkPass);
-				std::cout << "отмена удаления";
+				std::cout << "отмена удаления" << loginArr[i] << "\n\n";
 				Sleep(1500);
 				break;
 			}
