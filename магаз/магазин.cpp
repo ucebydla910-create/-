@@ -894,6 +894,8 @@ void DeleteUser()
 			{
 				if (userSize < 2)
 				{
+					ShowUsers();
+					isAdmin = 0;
 					std::cout << "\nВыберите номер пользователя для смены пароля \"exit\"для выхода";
 					std::cout << "нет пользователей для удаления";
 					Sleep(2000);
