@@ -890,17 +890,24 @@ void DeleteUser()
 				{
 					ShowUsers();
 					isAdmin = 0;
-					std::cout << "\nВыберите номер пользователя для смены пароля \"exit\"для выхода";
-					std::cout << "нет пользователей для удаления";
+					std::cout << "нет доступных пользователей для удаления";
 					Sleep(2000);
 					return;
 				}
-				else if (currentStatus == userStatus[0])
+			}
+			else if (currentStatus == userStatus[0])
 				{
 					ShowUsers();
 					isAdmin = 1;
-				}
+					std::cout << "\nВыберите номер пользователя для смены пароля \"exit\"для выхода";
+					Getline(choose);
+			if (choose == "exit")
+			{
+				std::cout << "отмена измения пароля!\n";
+				Sleep(2000);
+				break;
 			}
+				}
 			Getline(choose);
 			if (choose == "exit")
 			{
@@ -908,7 +915,7 @@ void DeleteUser()
 				Sleep(2000);
 				break;
 			}
-		}
+	   }
 	}
 }
 void DeleteItem()
