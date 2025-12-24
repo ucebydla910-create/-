@@ -903,17 +903,11 @@ void DeleteUser()
 					Getline(choose);
 			if (choose == "exit")
 			{
-				std::cout << "отмена измения пароля!\n";
+				std::cout << "отмена удаления пользователя!\n";
 				Sleep(2000);
 				break;
 			}
 				}
-			Getline(choose);
-			if (choose == "exit")
-			{
-				std::cout << "отмена измения пароля!\n";
-				Sleep(2000);
-				break;
 			}
 	   }
 	}
