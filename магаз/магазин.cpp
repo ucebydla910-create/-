@@ -846,16 +846,39 @@ void DeleteUser()
 	int isAdmin = 0;
 	while (true)
 	{
-		if (choose = "exit")
+		if (currentStatus == userStatus[0])
 		{
-		else if (IsNumber(choose))
-		{
-			if (userNumber < isAdmin || userNumber > userSize - 1)
-		    {
-			   std::cout << "Пользователь с таким номером не существует\n";
-			   Sleep(2000);
-		    }
+			if (userSize < 2)
+			{
+				ShowUsers();
+				isAdmin = 0;
+				std::cout << "нет доступных пользователей для удаления";
+				Sleep(2000);
+				return;
+			}
 		}
+		else if (currentStatus == userStatus[0])
+				{
+					ShowUsers();
+					isAdmin = 1;
+					std::cout << "\nВыберите номер пользователя для удаления пароля \"exit\"для выхода";
+					Getline(choose);
+					if (choose == "exit")
+					{
+						std::cout << "отмена удаления пользователя!\n";
+						Sleep(1500);
+						break;
+					}
+				}
+		       else if (IsNumber(choose))
+	            	{
+			             if (userNumber < isAdmin || userNumber > userSize - 1)
+		                {
+			                 std::cout << "Пользователь с таким номером не существует\n";
+			                 Sleep(2000);
+							break;
+		               }
+		          }
 		}
 		while (true)
 		{
@@ -884,31 +907,7 @@ void DeleteUser()
 				std::cout << "Некорректный пароль\n";
 				Sleep(1500);
 			}
-			if (currentStatus == userStatus[0])
-			{
-				if (userSize < 2)
-				{
-					ShowUsers();
-					isAdmin = 0;
-					std::cout << "нет доступных пользователей для удаления";
-					Sleep(2000);
-					return;
-				}
-			}
-			else if (currentStatus == userStatus[0])
-				{
-					ShowUsers();
-					isAdmin = 1;
-					std::cout << "\nВыберите номер пользователя для смены пароля \"exit\"для выхода";
-					Getline(choose);
-			if (choose == "exit")
-			{
-				std::cout << "отмена удаления пользователя!\n";
-				Sleep(2000);
-				break;
-			}
-				}
-			}
+		}
 	   }
 	}
 }
