@@ -56,12 +56,24 @@ std::string* nameArrCheck;
 
 unsigned int* countArrCheck;
 
+double ApplyBirthdayDiscount(const Date& currentDate, int userId, double totalSum);
+double ApplyBulkDiscount(double totalSum);
+
 double* priceArrCheck;
 double* totalpriceArrCheck;
 double cashIncome = 0.0;
 double bankIncome = 0.0;
 double cash = 3000 + rand() % 7000;
+struct Date 
+{
+	int day;
+	int month;
+	int year;
+};
+Date* birthDates = nullptr;
 
+void InitializeBirthDates();
+void PrintDiscountInfo(double birthdayDiscount, double bulkDiscount, double totalBefore, double totalAfter);
 void Selling();
 void CheckArrPuchback();
 void PrintCheck(double& totalSum);
@@ -171,6 +183,7 @@ int main()
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
 	srand(time(NULL));
+	InitializeBirthDates();
 
 	start();
 	delete[]loginArr;
@@ -186,14 +199,17 @@ int main()
 		delete[]coutArr;
 		delete[]priceArr;
 	}
+	if (birthDates != nullptr) {
+		delete[] birthDates;
+	}
 	return 0;
 }
 
 void Selling()
 {
 	std::string chooseId, chooseCount, choose, chooseCash;
-	unsigned int id = 0, count = 0, index = -1,
-		double totalSum = 0.0, money = 0.0;
+	unsigned int id = 0, count = 0, index = -1;
+	double totalSum = 0.0, money = 0.0;
 	bool isFrist = false;
 
 	while (true)
@@ -365,6 +381,31 @@ void Selling()
 				break;
 			}
 		}
+	}
+}
+void ApplyDiscountsToSale(double& totalSum, int userId)
+{
+	std::time_t t = std::time(nullptr);
+	std::tm* now = std::localtime(&t);
+	Date currentDate = { now->tm_mday, now->tm_mon + 1, now->tm_year + 1900 };
+
+	double originalSum = totalSum;
+	double birthdayDiscount = ApplyBirthdayDiscount(currentDate, userId, totalSum);
+	double bulkDiscount = ApplyBulkDiscount(totalSum);
+
+	// Применяем скидки
+	totalSum -= birthdayDiscount;
+	totalSum -= bulkDiscount;
+
+	if (totalSum < 0) totalSum = 0;
+
+	PrintDiscountInfo(birthdayDiscount, bulkDiscount, originalSum, totalSum);
+
+	awardArr[currentId] += totalSum;
+	double totalSum = 0.0;
+	for (size_t i = 0; i < checkSize; i++)
+	{
+		totalSum += totalpriceArrCheck[i];
 	}
 }
 void CreateStorage()
@@ -1740,6 +1781,76 @@ inline void Err(int time = 2000)
 	std::cout << "Некоректный вход\n";
 	Sleep(time);
 	system("cls");
+}
+
+void InitializeBirthDates() {
+	if (birthDates == nullptr) {
+		birthDates = new Date[userSize];
+		// Установила даты рожддения для примера
+		for (size_t i = 0; i < userSize; i++) {
+			birthDates[i].day = 1 + rand() % 28;
+			birthDates[i].month = 1 + rand() % 12;
+			birthDates[i].year = 1980 + rand() % 30;
+		}
+		// Для теста установила текущую дату как день рождения первого пользователя
+		std::time_t t = std::time(nullptr);
+		std::tm* now = std::localtime(&t);
+		birthDates[0].day = now->tm_mday;
+		birthDates[0].month = now->tm_mon + 1;
+	}
+}
+double ApplyBirthdayDiscount(const Date& currentDate, int userId, double totalSum) 
+{
+	if (userId >= 0 && userId < userSize && birthDates != nullptr) 
+	{
+		if (birthDates[userId].day == currentDate.day &&
+			birthDates[userId].month == currentDate.month) 
+		{
+			return totalSum * 0.15; // 15% скидка
+		}
+	}
+	return 0.0;
+}
+// Накопительная скидка на крупные покупки
+double ApplyBulkDiscount(double totalSum)
+{
+	if (totalSum > 5000.0)  
+	{
+		return totalSum * 0.10; // 10% скидка для покупок > 5000
+	}
+	else if (totalSum > 2000.0) 
+	{
+		return totalSum * 0.05; // 5% скидка для покупок > 2000
+	}
+	else if (totalSum > 1000.0) 
+	{
+		return totalSum * 0.03; // 3% скидка для покупок > 1000
+	}
+	return 0.0;
+}
+void PrintDiscountInfo(double birthdayDiscount, double bulkDiscount, double totalBefore, double totalAfter) 
+{
+	if (birthdayDiscount > 0 || bulkDiscount > 0) 
+	{
+		std::cout << "\n------------\n";
+		std::cout << "ПРИМЕНЕННЫЕ СКИДКИ:\n";
+
+		if (birthdayDiscount > 0) 
+		{
+			std::cout << "Скидка на день рождения: " << std::fixed << std::setprecision(2)
+				<< birthdayDiscount << " руб.\n";
+		}
+
+		if (bulkDiscount > 0) 
+		{
+			std::cout << "Скидка на крупную покупку: " << std::fixed << std::setprecision(2)
+				<< bulkDiscount << " руб.\n";
+		}
+
+		std::cout << "Сумма без скидок: " << totalBefore << " руб.\n";
+		std::cout << "Итоговая сумма: " << totalAfter << " руб.\n";
+		std::cout << "----------------\n\n";
+	}
 }
 
 template<typename Arr>
